@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Atlantic AI Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080C12;
+  --dark: #0D1320;
+  --card: #111827;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.15);
+  --gold: #00C8FF;
+  --gold-dim: rgba(0,200,255,0.12);
+  --cream: #F0F4F8;
+  --muted: #6B7A8D;
+  --body: #B8C5D6;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--black);
+  color: var(--body);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(1.5rem, 5vw, 3.75rem);
+  height: 68px;
+  background: rgba(8,12,18,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-icon {
+  width: 32px; height: 32px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-icon svg { width: 18px; height: 18px; }
+.nav-brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 3px;
+  color: var(--cream);
+}
+.nav-brand-sub {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.nav-back {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.nav-back:hover { color: var(--gold); }
+.nav-back svg { width: 14px; height: 14px; }
+
+/* HEADER */
+.page-header {
+  padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 5vw, 3.75rem) clamp(2.5rem, 6vw, 4rem);
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%);
+}
+.eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 18px;
+}
+.eyebrow-line { width: 32px; height: 1px; background: var(--gold); }
+.eyebrow-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold);
+}
+.page-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 7vw, 72px);
+  letter-spacing: 2px;
+  color: var(--cream); line-height: 1;
+  margin-bottom: 14px;
+}
+.page-meta {
+  font-size: 13px; font-weight: 300;
+  color: var(--muted);
+}
+
+/* LAYOUT */
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 3.75rem);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* TABLE OF CONTENTS */
+.toc {
+  position: sticky; top: 88px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--gold);
+  padding: 24px;
+}
+.toc-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 16px; font-weight: 700;
+}
+.toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.toc-list a {
+  display: block;
+  font-size: 12px; font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 8px;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  line-height: 1.4;
+}
+.toc-list a:hover { color: var(--cream); border-left-color: var(--gold); }
+@media (max-width: 768px) {
+  .toc { position: static; }
+}
+
+/* CONTENT */
+.content { min-width: 0; }
+.content-section { margin-bottom: 56px; scroll-margin-top: 100px; }
+.content-section:last-child { margin-bottom: 0; }
+.section-number {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  font-weight: 700; margin-bottom: 8px;
+}
+.content-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(18px, 2.5vw, 22px);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 700; color: var(--cream);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.content p {
+  font-size: 15px; font-weight: 300;
+  line-height: 1.85; color: var(--body);
+  margin-bottom: 16px;
+}
+.content p:last-child { margin-bottom: 0; }
+.content ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 16px;
+}
+.content ul li {
+  font-size: 15px; font-weight: 300;
+  line-height: 1.75; color: var(--body);
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.content ul li::before {
+  content: '';
+  width: 4px; height: 4px;
+  background: var(--gold); border-radius: 50%;
+  flex-shrink: 0; margin-top: 9px;
+}
+.content a {
+  color: var(--gold); text-decoration: none;
+  border-bottom: 1px solid rgba(0,200,255,0.3);
+  transition: border-color 0.2s;
+}
+.content a:hover { border-color: var(--gold); }
+.strong { color: var(--cream); font-weight: 500; }
+
+.highlight-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.highlight-box p { margin-bottom: 0; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 5vw, 3.75rem);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-copy {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 2px;
+  color: var(--muted); text-transform: uppercase;
+}
+.footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 2L15 14H3L9 2Z" stroke="#080C12" stroke-width="1.5" fill="none"/>
+        <circle cx="9" cy="9" r="2" fill="#080C12"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nav-brand-name">Atlantic AI</div>
+      <span class="nav-brand-sub">Automation</span>
+    </div>
+  </a>
+  <a href="/" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<div class="page-header">
+  <div class="eyebrow">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">Legal</span>
+  </div>
+  <h1 class="page-title">Terms of Service</h1>
+  <p class="page-meta">Last updated: April 2026 &nbsp;·&nbsp; Atlantic AI Automation</p>
+</div>
+
+<div class="layout">
+
+  <!-- Table of Contents -->
+  <aside>
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#agreement">01 &nbsp; Agreement to Terms</a></li>
+        <li><a href="#services">02 &nbsp; Services &amp; Scope</a></li>
+        <li><a href="#payment">03 &nbsp; Payment &amp; Cancellation</a></li>
+        <li><a href="#liability">04 &nbsp; Limitation of Liability</a></li>
+        <li><a href="#ip">05 &nbsp; Intellectual Property</a></li>
+        <li><a href="#confidentiality">06 &nbsp; Confidentiality</a></li>
+        <li><a href="#governing-law">07 &nbsp; Governing Law</a></li>
+        <li><a href="#contact">08 &nbsp; Contact</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+
+    <div class="content-section" id="agreement">
+      <div class="section-number">Section 01</div>
+      <h2 class="content-heading">Agreement to Terms</h2>
+      <p>By engaging Atlantic AI Automation ("Atlantic AI", "we", "us") for any service, you ("Client") agree to be bound by these Terms of Service. These terms constitute a legally binding agreement between you and Atlantic AI under the laws of the Republic of South Africa.</p>
+      <p>If you do not agree to these terms, please do not engage our services. Continued use of any Atlantic AI product or service following the acceptance of a proposal or invoice constitutes acceptance of these terms.</p>
+    </div>
+
+    <div class="content-section" id="services">
+      <div class="section-number">Section 02</div>
+      <h2 class="content-heading">Services Provided and Scope</h2>
+      <p>Atlantic AI provides digital services including, but not limited to:</p>
+      <ul>
+        <li>Brand identity design (logos, business profiles, brand guidelines)</li>
+        <li>Website and web application development</li>
+        <li>Custom AI chatbot and automation solutions</li>
+        <li>WhatsApp Business API integration and management</li>
+        <li>Digital strategy consulting</li>
+      </ul>
+      <p>The specific scope of services to be delivered is defined in the proposal, statement of work, or invoice agreed to by both parties. Any changes to scope must be agreed upon in writing and may result in adjusted pricing and timelines.</p>
+      <p>Atlantic AI reserves the right to decline any project or request that conflicts with our values, legal obligations, or ethical standards.</p>
+    </div>
+
+    <div class="content-section" id="payment">
+      <div class="section-number">Section 03</div>
+      <h2 class="content-heading">Payment Terms and Cancellation Policy</h2>
+      <p>Payment terms are as follows:</p>
+      <ul>
+        <li>Project-based work (websites, branding, once-off builds) requires a 50% deposit before work commences, with the balance due upon completion and before handover.</li>
+        <li>Monthly retainer services (AI chatbots, managed automation) are billed at the beginning of each billing cycle.</li>
+        <li>Token usage fees (for AI conversation volume) are billed in arrears based on actual usage at the end of each billing cycle.</li>
+        <li>Invoices are payable within 7 business days of issue unless otherwise agreed in writing.</li>
+      </ul>
+      <div class="highlight-box">
+        <p><span class="strong">Cancellation:</span> Monthly services may be cancelled with 30 days' written notice to <a href="mailto:reece@atlanticaiautomation.com">reece@atlanticaiautomation.com</a>. No refunds will be issued for the current billing month. The service will remain active until the end of the paid period.</p>
+      </div>
+      <p>Atlantic AI reserves the right to suspend services on accounts with outstanding invoices of more than 14 days. Late payments may attract interest at a rate of 2% per month on the overdue amount.</p>
+    </div>
+
+    <div class="content-section" id="liability">
+      <div class="section-number">Section 04</div>
+      <h2 class="content-heading">Limitation of Liability</h2>
+      <p>Atlantic AI is not responsible for the following:</p>
+      <ul>
+        <li><span class="strong">Third-party API downtime</span> — including but not limited to the WhatsApp Business API (Meta), OpenAI, Anthropic, or any other service provider. Scheduled maintenance or unexpected outages by these providers are outside our control.</li>
+        <li><span class="strong">Client-approved system prompt content</span> — the client is responsible for reviewing and approving the AI system prompt. Atlantic AI is not liable for outcomes resulting from instructions the client has approved, including AI responses generated from that configuration.</li>
+        <li><span class="strong">Business decisions</span> — any business decision made by the client based on analytics, reports, or AI outputs generated by our systems.</li>
+        <li><span class="strong">Force majeure events</span> — circumstances beyond our reasonable control including acts of God, load-shedding, civil unrest, or internet infrastructure failures.</li>
+      </ul>
+      <p>To the maximum extent permitted by South African law, Atlantic AI's total liability for any claim arising from our services shall not exceed the total fees paid by the client in the 3 months preceding the claim.</p>
+    </div>
+
+    <div class="content-section" id="ip">
+      <div class="section-number">Section 05</div>
+      <h2 class="content-heading">Intellectual Property</h2>
+      <p>Atlantic AI retains ownership of all underlying technology, frameworks, code libraries, AI architecture, and proprietary methodologies used to build your solution. This includes reusable code components, deployment infrastructure, and internal tooling.</p>
+      <p>Upon full payment, the client receives:</p>
+      <ul>
+        <li>Full ownership of all custom design assets created specifically for them (logos, graphics, brand files) — delivered in agreed formats.</li>
+        <li>A non-exclusive, non-transferable licence to use the software and AI systems built for them, for the duration of the active subscription or agreed maintenance period.</li>
+      </ul>
+      <div class="highlight-box">
+        <p>Licence to use Atlantic AI-built software is contingent on the subscription remaining active. Upon cancellation, the client retains ownership of exported data and design assets, but the hosted software licence ends at the close of the final billing period.</p>
+      </div>
+      <p>The client may not resell, sublicence, reverse-engineer, or redistribute any software, AI system, or tooling built by Atlantic AI without prior written consent.</p>
+    </div>
+
+    <div class="content-section" id="confidentiality">
+      <div class="section-number">Section 06</div>
+      <h2 class="content-heading">Confidentiality</h2>
+      <p>Both parties agree to keep confidential any proprietary, business-sensitive, or personal information shared during the engagement. Atlantic AI will not disclose client data, business strategy, or technical specifications to third parties without the client's written consent, except where required by law.</p>
+    </div>
+
+    <div class="content-section" id="governing-law">
+      <div class="section-number">Section 07</div>
+      <h2 class="content-heading">Governing Law</h2>
+      <p>These Terms of Service are governed by and construed in accordance with the laws of the Republic of South Africa. Any disputes arising from these terms or the services provided by Atlantic AI shall be subject to the exclusive jurisdiction of the South African courts.</p>
+      <p>Atlantic AI endeavours to resolve disputes amicably. In the event of a dispute, the parties agree to first attempt resolution through good-faith negotiation before pursuing formal legal proceedings.</p>
+    </div>
+
+    <div class="content-section" id="contact">
+      <div class="section-number">Section 08</div>
+      <h2 class="content-heading">Contact</h2>
+      <p>For any questions regarding these Terms of Service, please contact:</p>
+      <div class="highlight-box">
+        <p>
+          Atlantic AI Automation<br>
+          Email: <a href="mailto:reece@atlanticaiautomation.com">reece@atlanticaiautomation.com</a><br>
+          WhatsApp: <a href="https://wa.me/27676381778">+27 67 638 1778</a>
+        </p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 Atlantic AI Automation. All rights reserved.</div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#contact">Contact</a></li>
+    <li><a href="/privacy.html">Privacy Policy</a></li>
+    <li><a href="/terms.html">Terms of Service</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

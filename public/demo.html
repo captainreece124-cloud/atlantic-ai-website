@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Try Your Own Bot — Atlantic AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root {
+  --black: #080C12;
+  --dark: #0D1320;
+  --card: #111827;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.15);
+  --cyan: #00D4FF;
+  --cyan-dim: rgba(0,212,255,0.15);
+  --silver: #B8C5D6;
+  --silver-dim: #6B7A8D;
+  --white: #F0F4F8;
+  --text: #CBD5E1;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--black);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px;
+  height: 72px;
+  background: rgba(8,12,18,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo-mark { width: 36px; height: 36px; }
+.nav-logo-mark svg { width: 100%; height: 100%; }
+.nav-brand { display: flex; flex-direction: column; line-height: 1; }
+.nav-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); }
+.nav-brand-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 4px; color: var(--cyan); text-transform: uppercase; }
+.nav-back { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--silver-dim); text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--cyan); }
+
+/* PAGE LAYOUT */
+.page-wrapper {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 80px 24px 120px;
+}
+
+/* STEP INDICATORS */
+.step-indicators {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 64px;
+}
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  transition: color 0.3s;
+}
+.step-indicator.active { color: var(--cyan); }
+.step-indicator.done { color: var(--silver-dim); }
+.step-dot {
+  width: 28px; height: 28px;
+  border: 1px solid var(--border-bright);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  color: var(--silver-dim);
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+  flex-shrink: 0;
+}
+.step-indicator.active .step-dot {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+.step-indicator.done .step-dot {
+  background: rgba(0,212,255,0.1);
+  border-color: rgba(0,212,255,0.3);
+  color: rgba(0,212,255,0.5);
+}
+.step-connector {
+  width: 48px;
+  height: 1px;
+  background: var(--border-bright);
+  margin: 0 8px;
+}
+
+/* CARD */
+.demo-card {
+  width: 100%;
+  max-width: 600px;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  padding: 56px 56px;
+}
+
+/* STEP HEADINGS */
+.step-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 16px;
+}
+.step-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  letter-spacing: 2px;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.step-sub {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--silver);
+  margin-bottom: 40px;
+}
+
+/* FORM */
+.form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.form-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--silver-dim); }
+.form-input, .form-textarea {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 14px 16px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--cyan); }
+.form-textarea { resize: vertical; min-height: 100px; }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--silver-dim); }
+
+/* BUTTONS */
+.btn-primary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--black);
+  background: var(--cyan);
+  border: none;
+  padding: 16px 40px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s, transform 0.2s;
+  width: 100%;
+  text-align: center;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-ghost {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--silver);
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  padding: 14px 32px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s, color 0.2s;
+  text-align: center;
+}
+.btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+.btn-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--silver-dim);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* LOADING */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 0;
+}
+.loading-spinner {
+  width: 48px; height: 48px;
+  border: 2px solid var(--border-bright);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+}
+
+/* SUMMARY BULLETS */
+.summary-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.summary-bullets li {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--silver);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cyan);
+}
+.summary-bullets li::before {
+  content: '→';
+  color: var(--cyan);
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+/* CHAT */
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: var(--card); }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--border-bright); }
+.chat-bubble {
+  max-width: 85%;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+.chat-bubble.bot {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cyan);
+  align-self: flex-start;
+  color: var(--silver);
+}
+.chat-bubble.user {
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0,212,255,0.2);
+  align-self: flex-end;
+  color: var(--white);
+  text-align: right;
+}
+.chat-bubble.typing {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cyan);
+  align-self: flex-start;
+}
+.typing-dots { display: flex; gap: 4px; align-items: center; height: 20px; }
+.typing-dots span {
+  width: 6px; height: 6px;
+  background: var(--cyan);
+  border-radius: 50%;
+  animation: bounce 1.2s infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+.chat-input-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+.chat-input {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 14px 16px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+  height: 52px;
+  line-height: 1.4;
+}
+.chat-input:focus { border-color: var(--cyan); }
+.chat-input::placeholder { color: var(--silver-dim); }
+.chat-send {
+  background: var(--cyan);
+  border: none;
+  width: 52px; height: 52px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.chat-send:hover { opacity: 0.85; }
+.chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+.chat-send svg { width: 18px; height: 18px; stroke: var(--black); fill: none; stroke-width: 2; }
+.chat-counter {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--silver-dim);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* LIMIT REACHED BOX */
+.limit-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--cyan);
+  padding: 32px 28px;
+  margin-top: 8px;
+}
+.limit-box-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.limit-box-body {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--silver);
+  margin-bottom: 24px;
+}
+.limit-box-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.limit-box-actions .btn-primary { width: auto; }
+
+/* MARKDOWN IN BOT BUBBLES */
+.chat-bubble.bot p { margin-bottom: 8px; }
+.chat-bubble.bot p:last-child { margin-bottom: 0; }
+.chat-bubble.bot strong { color: var(--white); font-weight: 600; }
+.chat-bubble.bot em { font-style: italic; }
+.chat-bubble.bot ul, .chat-bubble.bot ol { padding-left: 20px; margin: 6px 0 8px; }
+.chat-bubble.bot li { margin-bottom: 4px; }
+.chat-bubble.bot code { background: rgba(0,212,255,0.1); color: var(--cyan); padding: 2px 6px; font-size: 12px; font-family: monospace; }
+.chat-bubble.bot h1, .chat-bubble.bot h2, .chat-bubble.bot h3 { font-family: 'Barlow Condensed', sans-serif; color: var(--white); letter-spacing: 1px; margin-bottom: 6px; font-size: 15px; }
+
+/* CHANNEL SELECTOR */
+.channel-group {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+}
+.channel-option { flex: 1; position: relative; }
+.channel-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+.channel-option span {
+  display: block;
+  padding: 13px 8px;
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  background: var(--card);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  border-right: 1px solid var(--border);
+  user-select: none;
+}
+.channel-option:last-child span { border-right: none; }
+.channel-option input[type="radio"]:checked + span {
+  background: var(--cyan-dim);
+  color: var(--cyan);
+}
+.channel-option span:hover { color: var(--silver); }
+
+/* ERROR */
+.error-msg {
+  font-size: 13px;
+  color: #ff6b6b;
+  margin-top: 8px;
+  display: none;
+}
+.error-msg.visible { display: block; }
+
+/* STEP VISIBILITY */
+.step { display: none; }
+.step.active { display: block; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  nav { padding: 0 20px; }
+  .page-wrapper { padding: 48px 16px 80px; }
+  .demo-card { padding: 32px 24px; }
+  .step-title { font-size: 32px; }
+  .step-indicators { gap: 0; }
+  .step-connector { width: 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="18,2 34,32 2,32" stroke="#00D4FF" stroke-width="1.5" fill="none"/>
+        <polygon points="18,8 28,28 8,28" stroke="rgba(0,212,255,0.3)" stroke-width="1" fill="none"/>
+        <circle cx="18" cy="17" r="5" stroke="#00D4FF" stroke-width="1" fill="none"/>
+        <line x1="18" y1="2" x2="18" y2="32" stroke="rgba(0,212,255,0.2)" stroke-width="0.5"/>
+        <line x1="2" y1="32" x2="34" y2="32" stroke="rgba(0,212,255,0.2)" stroke-width="0.5"/>
+      </svg>
+    </div>
+    <div class="nav-brand">
+      <span class="nav-brand-name">Atlantic AI</span>
+      <span class="nav-brand-sub">Digital Solutions</span>
+    </div>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="page-wrapper">
+
+  <div class="step-indicators">
+    <div class="step-indicator active" id="ind-1">
+      <div class="step-dot">1</div>
+      <span>Your Business</span>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step-indicator" id="ind-2">
+      <div class="step-dot">2</div>
+      <span>Your Assistant</span>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step-indicator" id="ind-3">
+      <div class="step-dot">3</div>
+      <span>Live Chat</span>
+    </div>
+  </div>
+
+  <div class="demo-card">
+
+    <!-- STEP 1: Industry Form -->
+    <div class="step active" id="step-1">
+      <div class="step-eyebrow">Free Demo</div>
+      <h1 class="step-title">See Your AI Assistant In Action</h1>
+      <p class="step-sub">Tell us about your business and we'll build you a custom bot on the spot. No commitment, no credit card — just 30 seconds.</p>
+
+      <div class="form-group">
+        <label class="form-label">Industry / Business Type</label>
+        <input type="text" class="form-input" id="input-industry" placeholder="e.g. Real Estate, Law Firm, Medical Practice" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Biggest Customer Service Challenge</label>
+        <textarea class="form-textarea" id="input-pain-points" placeholder="e.g. Answering the same questions repeatedly, capturing leads after hours, booking appointments"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Preferred Channel</label>
+        <div class="channel-group">
+          <label class="channel-option">
+            <input type="radio" name="channel" value="Website chat" checked>
+            <span>Website Chat</span>
+          </label>
+          <label class="channel-option">
+            <input type="radio" name="channel" value="WhatsApp">
+            <span>WhatsApp</span>
+          </label>
+          <label class="channel-option">
+            <input type="radio" name="channel" value="Both">
+            <span>Both</span>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Conversation Context <span style="color:var(--silver-dim);font-size:9px;letter-spacing:1px;text-transform:none;">(optional)</span></label>
+        <textarea class="form-textarea" id="input-conv-context" style="min-height:80px;" placeholder="e.g. Customer clicks chat after viewing a property listing, or Customer messages after seeing an ad"></textarea>
+      </div>
+      <p class="error-msg" id="step1-error"></p>
+      <button class="btn-primary" id="btn-generate">Build My Bot →</button>
+      <p class="btn-note">Takes 30 seconds. We generate a custom AI assistant built around your specific business.</p>
+    </div>
+
+    <!-- STEP 2: Bot Summary -->
+    <div class="step" id="step-2">
+      <div id="step2-loading" class="loading-state">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Building your assistant...</div>
+      </div>
+      <div id="step2-result" style="display:none;">
+        <div class="step-eyebrow">Your Custom Assistant</div>
+        <h2 class="step-title">Here's What Your Assistant Will Do</h2>
+        <ul class="summary-bullets" id="summary-list"></ul>
+        <button class="btn-primary" id="btn-start-chat">Start Chatting →</button>
+        <p class="btn-note" style="margin-top:12px;">This is a free preview. Your assistant will be customised further during onboarding.</p>
+      </div>
+      <p class="error-msg" id="step2-error"></p>
+    </div>
+
+    <!-- STEP 3: Live Chat -->
+    <div class="step" id="step-3">
+      <div class="step-eyebrow">Live Preview</div>
+      <h2 class="step-title" id="chat-heading" style="font-size:28px; margin-bottom:24px;">Your AI Assistant</h2>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div id="chat-input-area">
+        <div class="chat-input-row">
+          <textarea class="chat-input" id="chat-input" placeholder="Type your message..." rows="1"></textarea>
+          <button class="chat-send" id="btn-send">
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+        <div class="chat-counter" id="chat-counter">0 / 6 messages used</div>
+      </div>
+      <div id="limit-box" class="limit-box" style="display:none;">
+        <div class="limit-box-title">Ready to make this yours?</div>
+        <p class="limit-box-body">You've just experienced what your customers would interact with 24/7. This is just a taste — your real assistant would know your listings, your pricing, your team, and your process inside out.</p>
+        <div class="limit-box-actions">
+          <a href="https://atlanticaiautomation.com/#contact" class="btn-primary">Get Started →</a>
+          <a href="https://atlanticaiautomation.com/#services" class="btn-ghost">Learn More →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+marked.use({ breaks: true, gfm: true });
+
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:3001'
+  : 'https://app.atlanticaiautomation.com';
+
+let generatedSystemPrompt = '';
+let chatHistory = [];
+let messageCount = 0;
+
+// Step navigation
+function goToStep(n) {
+  document.querySelectorAll('.step').forEach((s, i) => {
+    s.classList.toggle('active', i + 1 === n);
+  });
+  [1,2,3].forEach(i => {
+    const ind = document.getElementById(`ind-${i}`);
+    ind.classList.toggle('active', i === n);
+    ind.classList.toggle('done', i < n);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// STEP 1 — Generate prompt
+document.getElementById('btn-generate').addEventListener('click', async () => {
+  const industry = document.getElementById('input-industry').value.trim();
+  const painPoints = document.getElementById('input-pain-points').value.trim();
+  const channel = document.querySelector('input[name="channel"]:checked')?.value || 'Website chat';
+  const convContext = document.getElementById('input-conv-context').value.trim();
+  const errEl = document.getElementById('step1-error');
+
+  if (!industry) {
+    errEl.textContent = 'Please enter your industry or business type.';
+    errEl.classList.add('visible');
+    return;
+  }
+  errEl.classList.remove('visible');
+
+  const btn = document.getElementById('btn-generate');
+  btn.disabled = true;
+  btn.textContent = 'Building...';
+
+  goToStep(2);
+  document.getElementById('step2-loading').style.display = 'flex';
+  document.getElementById('step2-result').style.display = 'none';
+
+  try {
+    const res = await fetch(`${API_BASE}/api/demo/generate-prompt`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ industry, painPoints, channel, convContext })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to generate assistant');
+
+    generatedSystemPrompt = data.systemPrompt;
+
+    // Populate summary
+    const list = document.getElementById('summary-list');
+    list.innerHTML = '';
+    (data.summary || []).forEach(bullet => {
+      const li = document.createElement('li');
+      li.textContent = bullet;
+      list.appendChild(li);
+    });
+
+    // Store opening message for chat
+    window._openingMessage = data.openingMessage || 'Hello! How can I help you today?';
+
+    document.getElementById('step2-loading').style.display = 'none';
+    document.getElementById('step2-result').style.display = 'block';
+  } catch (err) {
+    goToStep(1);
+    btn.disabled = false;
+    btn.textContent = 'Build My Bot →';
+    const e = document.getElementById('step1-error');
+    e.textContent = err.message || 'Something went wrong. Please try again.';
+    e.classList.add('visible');
+  }
+});
+
+// STEP 2 — Start chat
+document.getElementById('btn-start-chat').addEventListener('click', () => {
+  goToStep(3);
+  document.getElementById('chat-heading').textContent = 'Your AI Assistant';
+  initChat();
+});
+
+// STEP 3 — Chat
+function initChat() {
+  chatHistory = [];
+  messageCount = 0;
+  const messages = document.getElementById('chat-messages');
+  messages.innerHTML = '';
+  updateCounter();
+
+  // Show opening message
+  const opener = window._openingMessage || 'Hello! How can I help you today?';
+  appendBubble('bot', opener);
+}
+
+function appendBubble(role, text) {
+  const messages = document.getElementById('chat-messages');
+  const bubble = document.createElement('div');
+  bubble.className = `chat-bubble ${role}`;
+  if (role === 'bot') {
+    bubble.innerHTML = marked.parse(text);
+  } else {
+    bubble.textContent = text;
+  }
+  messages.appendChild(bubble);
+  messages.scrollTop = messages.scrollHeight;
+  return bubble;
+}
+
+function showTyping() {
+  const messages = document.getElementById('chat-messages');
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble typing';
+  bubble.id = 'typing-indicator';
+  bubble.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  messages.appendChild(bubble);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.remove();
+}
+
+function updateCounter() {
+  document.getElementById('chat-counter').textContent = `${messageCount} / 6 messages used`;
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text || messageCount >= 6) return;
+
+  input.value = '';
+  input.style.height = '52px';
+  document.getElementById('btn-send').disabled = true;
+
+  appendBubble('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  showTyping();
+
+  try {
+    const res = await fetch(`${API_BASE}/api/demo/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        systemPrompt: generatedSystemPrompt,
+        messageCount,
+        messages: chatHistory.slice(0, -1) // history before current message
+      })
+    });
+
+    const data = await res.json();
+    removeTyping();
+
+    if (!res.ok) throw new Error(data.error || 'Failed to get response');
+
+    if (data.reply === 'LIMIT_REACHED') {
+      showLimitReached();
+      return;
+    }
+
+    messageCount = data.messageCount || messageCount + 1;
+    updateCounter();
+    appendBubble('bot', data.reply);
+    chatHistory.push({ role: 'assistant', content: data.reply });
+
+    if (messageCount >= 6) {
+      showLimitReached();
+    } else {
+      document.getElementById('btn-send').disabled = false;
+    }
+  } catch (err) {
+    removeTyping();
+    appendBubble('bot', 'Sorry, something went wrong. Please try again.');
+    document.getElementById('btn-send').disabled = false;
+  }
+}
+
+function showLimitReached() {
+  document.getElementById('chat-input-area').style.display = 'none';
+  document.getElementById('limit-box').style.display = 'block';
+  document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+}
+
+document.getElementById('btn-send').addEventListener('click', sendMessage);
+
+document.getElementById('chat-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+// Auto-resize textarea
+document.getElementById('chat-input').addEventListener('input', function() {
+  this.style.height = '52px';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+</script>
+
+</body>
+</html>

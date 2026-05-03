@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Atlantic AI Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080C12;
+  --dark: #0D1320;
+  --card: #111827;
+  --border: rgba(255,255,255,0.07);
+  --border-bright: rgba(255,255,255,0.15);
+  --gold: #00C8FF;
+  --gold-dim: rgba(0,200,255,0.12);
+  --cream: #F0F4F8;
+  --muted: #6B7A8D;
+  --body: #B8C5D6;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--black);
+  color: var(--body);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(1.5rem, 5vw, 3.75rem);
+  height: 68px;
+  background: rgba(8,12,18,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-icon {
+  width: 32px; height: 32px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-icon svg { width: 18px; height: 18px; }
+.nav-brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 3px;
+  color: var(--cream);
+}
+.nav-brand-sub {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.nav-back {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.nav-back:hover { color: var(--gold); }
+.nav-back svg { width: 14px; height: 14px; }
+
+/* HEADER */
+.page-header {
+  padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 5vw, 3.75rem) clamp(2.5rem, 6vw, 4rem);
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%);
+}
+.eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 18px;
+}
+.eyebrow-line { width: 32px; height: 1px; background: var(--gold); }
+.eyebrow-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold);
+}
+.page-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 7vw, 72px);
+  letter-spacing: 2px;
+  color: var(--cream); line-height: 1;
+  margin-bottom: 14px;
+}
+.page-meta {
+  font-size: 13px; font-weight: 300;
+  color: var(--muted);
+}
+
+/* LAYOUT */
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 3.75rem);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* TABLE OF CONTENTS */
+.toc {
+  position: sticky; top: 88px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--gold);
+  padding: 24px;
+}
+.toc-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 16px; font-weight: 700;
+}
+.toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.toc-list a {
+  display: block;
+  font-size: 12px; font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 8px;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  line-height: 1.4;
+}
+.toc-list a:hover { color: var(--cream); border-left-color: var(--gold); }
+@media (max-width: 768px) {
+  .toc { position: static; }
+}
+
+/* CONTENT */
+.content { min-width: 0; }
+.content-section { margin-bottom: 56px; scroll-margin-top: 100px; }
+.content-section:last-child { margin-bottom: 0; }
+.section-number {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  font-weight: 700; margin-bottom: 8px;
+}
+.content-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(18px, 2.5vw, 22px);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 700; color: var(--cream);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.content p {
+  font-size: 15px; font-weight: 300;
+  line-height: 1.85; color: var(--body);
+  margin-bottom: 16px;
+}
+.content p:last-child { margin-bottom: 0; }
+.content ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 16px;
+}
+.content ul li {
+  font-size: 15px; font-weight: 300;
+  line-height: 1.75; color: var(--body);
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.content ul li::before {
+  content: '';
+  width: 4px; height: 4px;
+  background: var(--gold); border-radius: 50%;
+  flex-shrink: 0; margin-top: 9px;
+}
+.content a {
+  color: var(--gold); text-decoration: none;
+  border-bottom: 1px solid rgba(0,200,255,0.3);
+  transition: border-color 0.2s;
+}
+.content a:hover { border-color: var(--gold); }
+.strong { color: var(--cream); font-weight: 500; }
+
+.highlight-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.highlight-box p { margin-bottom: 0; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 5vw, 3.75rem);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-copy {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 2px;
+  color: var(--muted); text-transform: uppercase;
+}
+.footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 2L15 14H3L9 2Z" stroke="#080C12" stroke-width="1.5" fill="none"/>
+        <circle cx="9" cy="9" r="2" fill="#080C12"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nav-brand-name">Atlantic AI</div>
+      <span class="nav-brand-sub">Automation</span>
+    </div>
+  </a>
+  <a href="/" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<div class="page-header">
+  <div class="eyebrow">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">Legal</span>
+  </div>
+  <h1 class="page-title">Privacy Policy</h1>
+  <p class="page-meta">Last updated: April 2026 &nbsp;·&nbsp; Atlantic AI Automation</p>
+</div>
+
+<div class="layout">
+
+  <!-- Table of Contents -->
+  <aside>
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#popia">01 &nbsp; What is POPIA?</a></li>
+        <li><a href="#data-collected">02 &nbsp; What Data We Collect</a></li>
+        <li><a href="#data-storage">03 &nbsp; Storage &amp; Protection</a></li>
+        <li><a href="#third-parties">04 &nbsp; Third-Party Services</a></li>
+        <li><a href="#your-rights">05 &nbsp; Your Rights</a></li>
+        <li><a href="#deletion">06 &nbsp; Data Deletion</a></li>
+        <li><a href="#updates">07 &nbsp; Policy Updates</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+
+    <div class="content-section" id="popia">
+      <div class="section-number">Section 01</div>
+      <h2 class="content-heading">What is POPIA?</h2>
+      <p>The Protection of Personal Information Act (POPIA) is South Africa's primary data privacy law, enacted to regulate how organisations collect, store, use, and share personal information. It gives individuals the right to know what data is held about them, how it is used, and the right to request its deletion.</p>
+      <p>Atlantic AI is fully committed to POPIA compliance. This policy explains in plain English what information we collect, why we collect it, and how we protect it.</p>
+      <div class="highlight-box">
+        <p>We believe privacy is a right, not a checkbox. We collect only what we need, store it securely, and never sell it to anyone.</p>
+      </div>
+    </div>
+
+    <div class="content-section" id="data-collected">
+      <div class="section-number">Section 02</div>
+      <h2 class="content-heading">What Data We Collect and Why</h2>
+      <p>Depending on how you interact with Atlantic AI — as a website visitor, a lead, or a client — we may collect the following categories of information:</p>
+      <ul>
+        <li><span class="strong">Contact information</span> — name, email address, phone number, and business name submitted via our enquiry form or WhatsApp. Used to respond to your enquiry and manage our client relationship.</li>
+        <li><span class="strong">Conversation data</span> — messages sent to AI agents we build and manage on behalf of clients. Used to train and improve the AI system as authorised by the client.</li>
+        <li><span class="strong">Usage data</span> — anonymised analytics on how our websites and portals are used (page visits, session duration). Used to improve our products and services.</li>
+        <li><span class="strong">Business information</span> — details you share about your business during the onboarding and strategy process. Used solely to build your digital solution.</li>
+      </ul>
+      <p>We do not collect sensitive personal information (such as ID numbers, medical records, or financial account details) unless it is strictly required for a specific service and you have provided explicit consent.</p>
+    </div>
+
+    <div class="content-section" id="data-storage">
+      <div class="section-number">Section 03</div>
+      <h2 class="content-heading">How We Store and Protect Your Data</h2>
+      <p>All personal data processed by Atlantic AI is stored on secure, encrypted infrastructure. We use industry-standard security measures including:</p>
+      <ul>
+        <li>Encrypted data storage and transmission (TLS/SSL)</li>
+        <li>Access controls limiting data to authorised personnel only</li>
+        <li>Regular security reviews of our platforms and third-party integrations</li>
+        <li>Secure cloud infrastructure with geographic data residency controls</li>
+      </ul>
+      <p>We retain personal data only for as long as necessary to fulfil the purpose for which it was collected, or as required by South African law. Client data is held for the duration of the contract and a reasonable period thereafter, unless deletion is requested.</p>
+    </div>
+
+    <div class="content-section" id="third-parties">
+      <div class="section-number">Section 04</div>
+      <h2 class="content-heading">Third-Party Services</h2>
+      <p>Atlantic AI uses trusted third-party services to deliver our products. These may include cloud hosting providers, the WhatsApp Business API (Meta), and AI model providers. Each of these services has their own privacy and data processing agreements in place.</p>
+      <p>We never sell, rent, or trade your personal information to third parties for marketing purposes. Data shared with service providers is shared only to the extent necessary to deliver the service you have engaged us for.</p>
+    </div>
+
+    <div class="content-section" id="your-rights">
+      <div class="section-number">Section 05</div>
+      <h2 class="content-heading">Your Rights Under POPIA</h2>
+      <p>As a data subject under POPIA, you have the following rights:</p>
+      <ul>
+        <li><span class="strong">Right to access</span> — you may request a copy of the personal information we hold about you.</li>
+        <li><span class="strong">Right to correction</span> — you may request that inaccurate or outdated information be corrected.</li>
+        <li><span class="strong">Right to deletion</span> — you may request that your personal information be deleted, subject to any legal retention obligations.</li>
+        <li><span class="strong">Right to object</span> — you may object to the processing of your personal information for direct marketing purposes.</li>
+        <li><span class="strong">Right to complain</span> — you may lodge a complaint with the Information Regulator of South Africa if you believe your rights have been violated.</li>
+      </ul>
+    </div>
+
+    <div class="content-section" id="deletion">
+      <div class="section-number">Section 06</div>
+      <h2 class="content-heading">How to Request Data Deletion</h2>
+      <p>To request deletion of your personal information, or to exercise any of your rights under POPIA, please contact our designated Information Officer directly:</p>
+      <div class="highlight-box">
+        <p>
+          Email: <a href="mailto:reece@atlanticaiautomation.com">reece@atlanticaiautomation.com</a><br>
+          Subject line: <em>Data Privacy Request</em><br><br>
+          Please include your full name, the email address associated with your data, and a brief description of your request. We will respond within 10 business days.
+        </p>
+      </div>
+      <p>If your request relates to data held within a client's AI system (i.e., conversations with a chatbot powered by Atlantic AI), please contact that client directly as they are the responsible party for that data under POPIA.</p>
+    </div>
+
+    <div class="content-section" id="updates">
+      <div class="section-number">Section 07</div>
+      <h2 class="content-heading">Updates to This Policy</h2>
+      <p>We may update this policy from time to time to reflect changes in our services or legal requirements. The current version will always be published on this page with the date it was last updated. Continued use of our services after an update constitutes acceptance of the revised policy.</p>
+      <p>For any questions about this policy, contact us at <a href="mailto:reece@atlanticaiautomation.com">reece@atlanticaiautomation.com</a>.</p>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 Atlantic AI Automation. All rights reserved.</div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#contact">Contact</a></li>
+    <li><a href="/privacy.html">Privacy Policy</a></li>
+    <li><a href="/terms.html">Terms of Service</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
